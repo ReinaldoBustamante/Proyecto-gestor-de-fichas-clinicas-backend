@@ -50,6 +50,25 @@ app.get('/usuarios', (req, res) => {
     })
 })
 
+// ELIMINAR USUARIO
+app.delete("/usuarios/:id", (req, res) => {
+    pool.getConnection((err, connection) => {
+        if(err) throw err
+        console.log(`connected as id ${connection.threadId}`)
+        
+        connection.query("DELETE from usuarios WHERE id_usuario = ?", [req.params.id],
+        (err, rows) => {
+            connection.release()
+            if(!err){
+                res.send(`usuario con id: ${req.params.id} fue removido `)
+            }
+            else{
+                console.log(err)
+            }
+        })
+    })
+})
+
 // REGISTRAR USUARIO
 
 app.post('/register', (req, res) => {
