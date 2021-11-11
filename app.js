@@ -142,7 +142,7 @@ app.delete("/pacientes/:id", (req, res) => {
         if(err) throw err
         console.log(`connected as id ${connection.threadId}`)
         
-        connection.query("DELETE from pacientes WHERE id = ?", [req.params.id],
+        connection.query("DELETE from pacientes WHERE id_paciente = ?", [req.params.id],
         (err, rows) => {
             connection.release()
             if(!err){
