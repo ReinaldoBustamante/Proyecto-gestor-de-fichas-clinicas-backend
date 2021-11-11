@@ -160,6 +160,27 @@ app.get('/pacientes/:rut', (req, res) => {
 
 // -----------------------------------ODONTOLOGOS--------------------------------------------------------
 
+// ----------------post odontologo---------------------------------
+app.post('/registrarOdontologo', (req, res) => {
+    
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const telefono   = req.body.telefono
+    const correo     = req.body.correo
+  
+
+    pool.query(
+        'INSERT INTO odontologo(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut,telefono, correo],
+        (err, result) =>{
+            console.log(err)
+            
+        }
+         
+    )
+   
+})
+
+
 app.get('/odontologos', (req, res) => {
 
     pool.getConnection((err, connection) =>{
