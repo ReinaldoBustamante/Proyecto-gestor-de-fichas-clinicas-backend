@@ -115,6 +115,7 @@ app.post('/pacientes', (req, res) => {
     
     const id_odontologo = req.body.id_odontologo
     const nombre = req.body.nombre
+    const sexo = req.body.sexo
     const rut = req.body.rut
     const telefono   = req.body.telefono
     const celular     = req.body.celular
@@ -123,7 +124,7 @@ app.post('/pacientes', (req, res) => {
     const domicilio     = req.body.domicilio
     const profesion     = req.body.profesion
     const lugar_trabajo     = req.body.lugarTrabajo
-    const sexo = req.body.sexo
+   
 
     pool.query(
         'INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
