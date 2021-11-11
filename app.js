@@ -9,14 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
-// FIX CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
 
 
 // MYSQL
@@ -241,6 +233,25 @@ app.get('/tons', (req, res) => {
     })
 })   
 
+// ----------------post odontologo---------------------------------
+app.post('/registrarTons', (req, res) => {
+    
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const telefono   = req.body.telefono
+    const correo     = req.body.correo
+  
+
+    pool.query(
+        'INSERT INTO tons(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut,telefono, correo],
+        (err, result) =>{
+            console.log(err)
+            
+        }
+         
+    )
+   
+})
 // TONS ID
 
 app.get('/tons/:id', (req, res) => {
