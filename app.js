@@ -30,6 +30,26 @@ const pool = mysql.createPool({
 })
 
 
+// USUARIOS
+
+app.get('/usuarios', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from usuarios', (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log(err)
+            }
+        })
+    })
+})
+
 // REGISTRAR USUARIO
 
 app.post('/register', (req, res) => {
