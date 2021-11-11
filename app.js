@@ -122,9 +122,10 @@ app.post('/registrarPaciente', (req, res) => {
     const domicilio     = req.body.domicilio
     const profesion     = req.body.profesion
     const lugar_trabajo     = req.body.lugarTrabajo
+    const sexo = req.body.sexo
 
     pool.query(
-        'INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo) VALUES (?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo],
+        'INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
         (err, result) =>{
             console.log(err)
             
