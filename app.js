@@ -111,7 +111,7 @@ app.get('/pacientes', (req, res) => {
 })
 
 // ----------------post paciente---------------------------------
-app.post('/registrarPaciente', (req, res) => {
+app.post('/pacientes', (req, res) => {
     
     const id_odontologo = req.body.id_odontologo
     const nombre = req.body.nombre
