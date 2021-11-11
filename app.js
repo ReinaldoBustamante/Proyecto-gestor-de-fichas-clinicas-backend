@@ -38,7 +38,7 @@ app.get('/usuarios', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('SELECT username, nombre, rut, correo, rol from usuarios', (err, rows) => {
+        connection.query('SELECT username, nombre, rut, correo, rol, id_usuario from usuarios', (err, rows) => {
             connection.release() // return the connection to pool
 
             if(!err){
