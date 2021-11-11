@@ -200,26 +200,6 @@ app.get('/odontologos/:id', (req, res) => {
 
 })
 
-// ----------------ODONTOLOGO POST---------------------------------
-app.post('/agregar-odontologos', (req, res) => {
-    
-    const nombre = req.body.nombre
-    const rut = req.body.rut
-    const telefono   = req.body.telefono
-    const correo = req.body.correo
-    
-
-    pool.query(
-        'INSERT INTO odontologos(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut,telefono, correo],
-        (err, result) =>{
-            console.log(err)
-            
-        }
-         
-    )
-   
-})
-
 //-----------------------TONS-------------------------------------------------------------
 
 app.get('/tons', (req, res) => {
