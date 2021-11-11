@@ -89,6 +89,7 @@ app.post('/login', (req, res) => {
 
 
 
+
 // -----------------------------PACIENTES-------------------------------------------------------------
 
 app.get('/pacientes', (req, res) => {
@@ -133,6 +134,25 @@ app.post('/registrarPaciente', (req, res) => {
          
     )
    
+})
+
+//Eliminar Pacientes
+app.delete("/eliminarPaciente/:rut", (req,res) =>{
+    pool.getConnection((err, connection) => {
+        if(err) throw err
+        console.log(`"connected as id ${connection.threadId}`)
+
+        connection.query("DELETE from pacientes WHERE rut = ?", [req.params.rut],
+        (err, rows) => {
+            connection.release()
+            if(!err){
+                res.send(`Paciente con rut: ${req.params.rut} fue removido.`)
+            }
+            else{
+                console.log(err)
+            }
+        })
+    })
 })
 
 
