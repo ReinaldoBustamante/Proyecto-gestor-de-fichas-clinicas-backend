@@ -1,23 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
-
+const cors = require("cors")
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use(bodyParser.urlencoded({ extended: false }))
+const config = require('./config');
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-// FIX CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
-
+app.use(cors(
+    config.application.cors.server
+));
 
 // MYSQL
 
