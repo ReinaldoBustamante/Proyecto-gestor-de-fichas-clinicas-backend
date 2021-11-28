@@ -168,8 +168,13 @@ app.post('/pacientes', (req, res) => {
     pool.query(
         'INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
         (err, result) =>{
-            console.log(err)
-            
+            connection.release()
+            if(!err){
+                res.send(`paciente con rut: ${req.params.rut} fue añadido `)
+            }
+            else{
+                console.log("Error al añadir un paciente")
+            }
         }
          
     )
