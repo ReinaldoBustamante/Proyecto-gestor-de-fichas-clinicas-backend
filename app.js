@@ -143,7 +143,7 @@ app.get('/pacientes', (req, res) => {
             if(!err){
                 res.send(rows)
             } else{
-                console.log(err)
+                console.log("Error")
             }
         })
     })
@@ -164,20 +164,21 @@ app.post('/pacientes', (req, res) => {
     const profesion     = req.body.profesion
     const lugar_trabajo     = req.body.lugarTrabajo
    
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
 
-    pool.query(
-        'INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
-        (err, result) =>{
-            connection.release()
+        connection.query('INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
+        (err, rows) =>{
+            connection.release() // return the connection to pool
+
             if(!err){
-                res.send(`paciente con rut: ${req.params.rut} fue añadido `)
+                res.send(rows)
+            } else{
+                console.log("Error")
             }
-            else{
-                console.log("Error al añadir un paciente")
-            }
-        }
-         
-    )
+        })
+    })
    
 })
 
@@ -191,9 +192,9 @@ app.delete("/pacientes/:id", (req, res) => {
         (err, rows) => {
             connection.release()
             if(!err){
-                res.send(`paciente con id: ${req.params.id} fue removido `)
-            }
-            else{
+                res.send(rows)
+
+            } else{
                 console.log(err)
             }
         })
