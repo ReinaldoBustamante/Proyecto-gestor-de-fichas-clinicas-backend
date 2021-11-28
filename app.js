@@ -446,7 +446,7 @@ app.get('/fichas-clinicas', (req, res) => {
             if(!err){
                 res.send(rows)
             } else{
-                console.log(err)
+                console.log("error")
             }
         })
     })
