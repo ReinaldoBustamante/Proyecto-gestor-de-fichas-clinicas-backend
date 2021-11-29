@@ -31,8 +31,7 @@ const pool = mysql.createPool({
 
 //inicio
 app.get('/', (req, res) => {
-
-    <div>Hola Mundo</div>
+    console.log("se inicio la api")
 })
 
 // USUARIOS
