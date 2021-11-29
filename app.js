@@ -29,6 +29,11 @@ const pool = mysql.createPool({
     database        : 'bp4p4qivuieteekb'
 })
 
+//inicio
+app.get('/', (req, res) => {
+
+    <div>Hola Mundo</div>
+})
 
 // USUARIOS
 
