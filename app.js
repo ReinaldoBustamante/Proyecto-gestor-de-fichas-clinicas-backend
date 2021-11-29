@@ -159,7 +159,7 @@ app.post('/pacientes', (req, res) => {
     const telefono   = req.body.telefono
     const celular     = req.body.celular
     const estado_civil   = req.body.estadoCivil
-    const edad = req.body.edad
+    const fecha_nacimiento = req.body.fecha_nacimiento
     const domicilio     = req.body.domicilio
     const profesion     = req.body.profesion
     const lugar_trabajo     = req.body.lugarTrabajo
@@ -168,7 +168,7 @@ app.post('/pacientes', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, edad, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, edad, domicilio, profesion, lugar_trabajo,sexo],
+        connection.query('INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, fecha_nacimiento, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, fecha_nacimiento, domicilio, profesion, lugar_trabajo,sexo],
         (err, rows) =>{
             connection.release() // return the connection to pool
 
@@ -309,46 +309,7 @@ app.get('/tons', (req, res) => {
 
 // ----------------post odontologo---------------------------------
 app.post('/registrarTons', (req, res) => {
-    
-    const nombre = req.body.nombre
-    const rut = req.body.rut
-    const telefono   = req.body.telefono
-    const correo     = req.body.correo
-  
-
-    pool.query(
-        'INSERT INTO tons(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut,telefono, correo],
-        (err, result) =>{
-            console.log(err)
-            
-        }
-         
-    )
-   
-})
-// TONS ID
-
-app.get('/tons/:id', (req, res) => {
-
-    pool.getConnection((err, connection) =>{
-        if(err) throw err
-        console.log(`conected as id ${connection.threadId}`)
-
-        connection.query('SELECT * from tons WHERE id_tons = ?', [req.params.id], (err, rows) => {
-            connection.release() // return the connection to pool
-
-            if(!err){
-                res.send(rows)
-            } else{
-                console.log(err)
-            }
-        })
-    })
-
-})
-
-
-//----------------------ODONTOGRAMA-----------------------------------------
+    //----------------------ODONTOGRAMA-----------------------------------------
 
 app.get('/odontogramas', (req, res) => {
 
@@ -685,6 +646,45 @@ app.get('/odontologos-tons/:id', (req, res) => {
     })
 
 })
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const telefono   = req.body.telefono
+    const correo     = req.body.correo
+  
+
+    pool.query(
+        'INSERT INTO tons(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut,telefono, correo],
+        (err, result) =>{
+            console.log(err)
+            
+        }
+         
+    )
+   
+})
+// TONS ID
+
+app.get('/tons/:id', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from tons WHERE id_tons = ?', [req.params.id], (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log(err)
+            }
+        })
+    })
+
+})
+
+
+
 
 
 
