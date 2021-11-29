@@ -374,6 +374,30 @@ app.post('/tons', (req, res) => {
     })
    
 })
+
+
+//FICHA CLINICA
+
+//GET FICHA
+app.get('/fichas', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from ficha', (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+})
+
+
 // Listen on enviroment port or 5000
 
 app.listen(port,() => console.log(`Listen on port ${port}`))
