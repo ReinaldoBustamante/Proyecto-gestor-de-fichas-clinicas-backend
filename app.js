@@ -396,6 +396,24 @@ app.get('/fichas', (req, res) => {
         })
     })
 })
+//GET FICHA RUT
+app.get('/fichas/:rut', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from ficha WHERE rut = ?', [req.params.rut], (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+})
 
 
 // Listen on enviroment port or 5000
