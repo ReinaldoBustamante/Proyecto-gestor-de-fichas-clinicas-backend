@@ -128,10 +128,56 @@ app.post('/login', (req, res) => {
 
 
 
+//USUARIOS
+
+//get
+app.get('/usuarios', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT (nombre, rut, correo, telefono, rol) from usuarios', (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+})
 
 
+//POST usuarios
 
+app.post('/usuarios', (req, res) => {
+    
+    const username = req.body.username
+    const password = req.body.password
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const correo   = req.body.correo
+    const telefono     = req.body.telefono
+   
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
 
+        connection.query('INSERT INTO usuarios(username, password, nombre, rut, correo, telefono) VALUES (?,?,?,?,?,?)', [username, password, nombre, rut,telefono, correo],
+        (err, rows) =>{
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+   
+})
 
 
 
