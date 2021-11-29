@@ -137,7 +137,7 @@ app.get('/usuarios', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('SELECT (nombre, rut, correo, telefono, rol) from usuarios', (err, rows) => {
+        connection.query('SELECT (rol) from usuarios', (err, rows) => {
             connection.release() // return the connection to pool
 
             if(!err){
@@ -160,12 +160,13 @@ app.post('/usuarios', (req, res) => {
     const rut = req.body.rut
     const correo   = req.body.correo
     const telefono     = req.body.telefono
+    const rol = req.body.rol
    
     pool.getConnection((err, connection) =>{
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('INSERT INTO usuarios(username, password, nombre, rut, correo, telefono) VALUES (?,?,?,?,?,?)', [username, password, nombre, rut,telefono, correo],
+        connection.query('INSERT INTO usuarios(username, password, nombre, rut, correo, telefono,rol) VALUES (?,?,?,?,?,?,?)', [username, password, nombre, rut,telefono, correo, rol],
         (err, rows) =>{
             connection.release() // return the connection to pool
 
