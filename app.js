@@ -217,7 +217,7 @@ app.get('/pacientes/:rut', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('SELECT * from pacientes WHERE rut = ?', [req.params.rut], (err, rows) => {
+        connection.query('SELECT * from paciente WHERE rut = ?', [req.params.rut], (err, rows) => {
             connection.release() // return the connection to pool
 
             if(!err){
