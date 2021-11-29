@@ -143,7 +143,7 @@ app.get('/pacientes', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('SELECT * from pacientes', (err, rows) => {
+        connection.query('SELECT * from paciente', (err, rows) => {
             connection.release() // return the connection to pool
 
             if(!err){
@@ -174,7 +174,7 @@ app.post('/pacientes', (req, res) => {
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('INSERT INTO pacientes(id_odontologo,nombre, rut, telefono, celular, estado_civil, fecha_nacimiento, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, fecha_nacimiento, domicilio, profesion, lugar_trabajo,sexo],
+        connection.query('INSERT INTO paciente(id_odontologo,nombre, rut, telefono, celular, estado_civil, fecha_nacimiento, domicilio,profesion,lugar_trabajo, sexo) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [id_odontologo,nombre, rut,telefono, celular, estado_civil, fecha_nacimiento, domicilio, profesion, lugar_trabajo,sexo],
         (err, rows) =>{
             connection.release() // return the connection to pool
 
@@ -189,12 +189,12 @@ app.post('/pacientes', (req, res) => {
 })
 
 // DELETE PACIENTE
-app.delete("/pacientes/:id", (req, res) => {
+app.delete("/pacientes/:rut", (req, res) => {
     pool.getConnection((err, connection) => {
         if(err) throw err
         console.log(`connected as id ${connection.threadId}`)
         
-        connection.query("DELETE from pacientes WHERE id_paciente = ?", [req.params.id],
+        connection.query("DELETE from paciente WHERE rut = ?", [req.params.rut],
         (err, rows) => {
             connection.release()
             if(!err){
@@ -209,7 +209,7 @@ app.delete("/pacientes/:id", (req, res) => {
 
 
 
-// PACIENTES RUT
+// PACIENTES rut
 
 app.get('/pacientes/:rut', (req, res) => {
 
