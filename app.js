@@ -327,6 +327,53 @@ app.post('/odontologos', (req, res) => {
    
 })
 
+// TONS
+
+//GET TONS
+app.get('/tons', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from tons', (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+})
+// POST TONS
+app.post('/tons', (req, res) => {
+    
+  
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const telefono   = req.body.telefono
+    const correo  = req.body.correo
+  
+   
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('INSERT INTO tons(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut, telefono, correo],
+        (err, rows) =>{
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+   
+})
 // Listen on enviroment port or 5000
 
 app.listen(port,() => console.log(`Listen on port ${port}`))
