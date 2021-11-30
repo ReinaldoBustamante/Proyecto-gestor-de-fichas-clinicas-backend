@@ -7,11 +7,11 @@ const port = process.env.PORT || 5000
 
 //rutas
 const usuarios = require("./routes/Usuarios")
-const login = require("./routes/Login")
 const pacientes = require("./routes/Pacientes")
 const odontologos = require("./routes/Odontologos")
 const tons = require("./routes/Tons")
 const fichas = require("./routes/Ficha")
+
 // FIX CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -21,6 +21,35 @@ app.use((req, res, next) => {
     next();
 });
 
+//conexion
+const db = require("./connection")
+
+//Login
+app.post('/login', (req, res) => {
+
+    const username = req.body.username
+    const password = req.body.password
+
+
+    pool.query(
+        'SELECT * FROM usuarios WHERE username = ? AND password = ?', [username, password],
+        (err, result) =>{
+
+            if (err) {
+                res.send({err: err})
+            } 
+
+            if (result.length > 0){
+                res.send(result)
+            }else{
+                res.send({Message: 'Credenciales Incorrectas.'})
+            }
+     
+        }
+         
+    )
+   
+})
 
 // API
 app.use(login)
