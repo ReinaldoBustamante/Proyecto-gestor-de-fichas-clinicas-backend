@@ -12,8 +12,7 @@ const pacientes = require("./routes/Pacientes")
 const odontologos = require("./routes/Odontologos")
 const tons = require("./routes/Tons")
 const fichas = require("./routes/Ficha")
-const cors = require('cors');
-app.use(cors())
+
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
