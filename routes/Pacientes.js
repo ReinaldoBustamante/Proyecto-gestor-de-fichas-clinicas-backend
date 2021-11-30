@@ -24,7 +24,7 @@ router.route("/pacientes")
                 if(!err){
                     res.send(rows)
                 } else{
-                    console.log("error")
+                    console.log(err)
                 }
             })
         })
