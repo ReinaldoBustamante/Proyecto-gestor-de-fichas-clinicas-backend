@@ -60,7 +60,7 @@ router.route("/usuarios")
         
 
     
-router.route("/usuarios/:id")
+router.route("/usuarios/:rut")
     .delete((req, res) => {
         db.getConnection((err, connection) => {
             if(err) throw err
