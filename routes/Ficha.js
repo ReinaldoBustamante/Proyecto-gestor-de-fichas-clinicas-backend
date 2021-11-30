@@ -33,13 +33,15 @@ router.route("/fichas")
     })
     .post((req, res) => {
         const rut = req.body.rut
-       
+        const fecha_nacimiento = req.body.fecha_nacimiento
+        const fecha_ficha = req.body.fecha_ficha
+
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
-            connection.query('INSERT INTO ficha(rut) VALUES (?)',
-            [rut],
+            connection.query('INSERT INTO ficha(rut, fecha_nacimiento, fecha_ficha) VALUES (?, ?, ?)',
+            [rut, fecha_nacimiento,fecha_ficha],
             (err, rows) =>{
                 connection.release() // return the connection to pool
     
