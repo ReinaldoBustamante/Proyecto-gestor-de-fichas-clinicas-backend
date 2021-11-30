@@ -58,7 +58,8 @@ router.route("/odontologos")
        
     })
     
-router.route("odontologos/:rut")
+router.route("/odontologos/:rut")
+    
     .delete((req, res) => {
         db.getConnection((err, connection) => {
             if(err) throw err
