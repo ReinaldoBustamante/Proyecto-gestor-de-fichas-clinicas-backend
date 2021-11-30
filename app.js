@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 
 const app = express()
+
 const port = process.env.PORT || 5000
 
 //rutas
@@ -12,6 +13,9 @@ const odontologos = require("./routes/Odontologos")
 const tons = require("./routes/Tons")
 const fichas = require("./routes/Ficha")
 
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use(bodyParser.json())
 // FIX CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
