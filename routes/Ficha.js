@@ -9,14 +9,33 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
-router.route("/odontologos")
+
+router.route("/fichas")
     .get((req, res) => {
 
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
-            connection.query('SELECT * from odontologos', (err, rows) => {
+            connection.query('SELECT * from ficha', (err, rows) => {
+                connection.release() // return the connection to pool
+    
+                if(!err){
+                    res.send(rows)
+                } else{
+                    console.log("error")
+                }
+            })
+        })
+    })
+router.route("/fichas/:rut")
+    .get((req, res) => {
+
+        db.getConnection((err, connection) =>{
+            if(err) throw err
+            console.log(`conected as id ${connection.threadId}`)
+    
+            connection.query('SELECT * from ficha WHERE rut = ?', [req.params.rut], (err, rows) => {
                 connection.release() // return the connection to pool
     
                 if(!err){
@@ -28,30 +47,4 @@ router.route("/odontologos")
         })
     })
 
-    .post((req, res) => {
-    
-  
-        const nombre = req.body.nombre
-        const rut = req.body.rut
-        const telefono   = req.body.telefono
-        const correo  = req.body.correo
-      
-       
-        db.getConnection((err, connection) =>{
-            if(err) throw err
-            console.log(`conected as id ${connection.threadId}`)
-    
-            connection.query('INSERT INTO odontologos(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut, telefono, correo],
-            (err, rows) =>{
-                connection.release() // return the connection to pool
-    
-                if(!err){
-                    res.send(rows)
-                } else{
-                    console.log("error")
-                }
-            })
-        })
-       
-    })
 module.exports = router
