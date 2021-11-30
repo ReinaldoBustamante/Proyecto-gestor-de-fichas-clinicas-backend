@@ -31,7 +31,7 @@ app.post('/login', (req, res) => {
     const password = req.body.password
 
 
-    pool.query(
+    db.query(
         'SELECT * FROM usuarios WHERE username = ? AND password = ?', [username, password],
         (err, result) =>{
 
