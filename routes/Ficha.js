@@ -31,7 +31,7 @@ router.route("/fichas")
         })
     })
     .post((req, res) => {
-        
+        app.use(cors)
         const rut = req.body.rut
         const fecha_nacimiento = req.body.fecha_nacimiento 
         const fecha_ficha = req.body.fecha_ficha 
