@@ -65,7 +65,7 @@ router.route("/tons")
         db.getConnection((err, connection) => {
             if(err) throw err
             console.log(`connected as id ${connection.threadId}`)            
-            connection.query("DELETE from odontologos WHERE rut = ?", [req.params.rut],
+            connection.query("DELETE from tons WHERE rut = ?", [req.params.rut],
             (err, rows) => {
                 connection.release()
                 if(!err){
