@@ -57,4 +57,23 @@ router.route("/odontologos")
         })
        
     })
+    
+router.route("odontologos/:rut")
+    .delete((req, res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err
+            console.log(`connected as id ${connection.threadId}`)            
+            connection.query("DELETE from odontologos WHERE rut = ?", [req.params.rut],
+            (err, rows) => {
+                connection.release()
+                if(!err){
+                    res.send(rows)
+                }
+                else{
+                    console.log("error")
+                }
+            })
+        })
+    })
+
 module.exports = router
