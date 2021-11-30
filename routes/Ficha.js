@@ -35,6 +35,7 @@ router.route("/fichas")
         const rut = req.body.rut
         const fecha_nacimiento = req.body.fecha_nacimiento 
         const fecha_ficha = req.body.fecha_ficha 
+<<<<<<< HEAD
         const padre_con_vida = req.body.padre_con_vida 
         const enfermedad_padre = req.body.enfermedad_padre //
         const madre_con_vida   = req.body.madre_con_vida //
@@ -76,12 +77,21 @@ router.route("/fichas")
         const constancia = req.body.constancia
         const que_constancia = req.body.que_constancia
        
+=======
+        const padre_con_vida = req.body.padre_con_vida
+        const enfermedad_padre = req.body.enfermedad_padre
+>>>>>>> parent of d0f67da... post ficha seccion madre
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
+<<<<<<< HEAD
             connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha, enfermedad_padre, madre_con_vida, enfermedad_madre, paciente_enfermo,  tratamiento_paciente,medicamentos,medicamentos_cinco_años, padre_con_vida ,alergico_droga_alimento, que_droga_alimento, cicatriza_bien, tiene_fiebre_reumatica, tratamiento_fiebre_reumatica, diabetico, diabetes_controlada_con, problema_cardiaco, que_problema_cardiaco, toma_seguido_aspirina, frecuencia, tiene_presion_alta, tratamiento_presion, problemas_renales, ulcera_gastrica, hepatitis, tipo_hepatitis, problema_hepatico,cual_problema_hepatico, convulsiones, epileptico,medicamento_epilepcia, fue_operado, operado_de, problemas_respiratorios, que_problema_respiratorio, fuma, cuantos_fuma, esta_embarazada, de_cuantos_meses, constancia, que_constancia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             [rut,fecha_nacimiento,fecha_ficha, enfermedad_padre,madre_con_vida, enfermedad_madre, paciente_enfermo, tratamiento_paciente, medicamentos, medicamentos_cinco_años,padre_con_vida ,alergico_droga_alimento, que_droga_alimento, cicatriza_bien, tiene_fiebre_reumatica, tratamiento_fiebre_reumatica, diabetico, diabetes_controlada_con, problema_cardiaco, que_problema_cardiaco, toma_seguido_aspirina, frecuencia, tiene_presion_alta, tratamiento_presion, problemas_renales, ulcera_gastrica, hepatitis, tipo_hepatitis, problema_hepatico,cual_problema_hepatico, convulsiones, epileptico,medicamento_epilepcia, fue_operado, operado_de, problemas_respiratorios, que_problema_respiratorio, fuma, cuantos_fuma, esta_embarazada, de_cuantos_meses, constancia, que_constancia],
+=======
+            connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha, padre_con_vida, enfermedad_padre) VALUES (?,?,?,?,?)',
+            [rut,fecha_nacimiento,fecha_ficha, padre_con_vida, enfermedad_padre],
+>>>>>>> parent of d0f67da... post ficha seccion madre
             (err, rows) =>{
                 connection.release() // return the connection to pool
     
