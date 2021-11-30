@@ -35,13 +35,16 @@ router.route("/fichas")
         const rut = req.body.rut
         const fecha_nacimiento = req.body.fecha_nacimiento
         const fecha_ficha = req.body.fecha_ficha
-
+        const padre_con_vida = req.body.padre_con_vida
+        const enfermedad_padre = req.body.enfermedad_padre
+        const madre_con_vida = req.body.madre_con_vida
+        const enfermedad_madre = req.body.enfermedad_madre
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
-            connection.query('INSERT INTO ficha(rut, fecha_nacimiento, fecha_ficha) VALUES (?, ?, ?)',
-            [rut, fecha_nacimiento,fecha_ficha],
+            connection.query('INSERT INTO ficha(enfermedad_madre,madre_con_vida,enfermedad_padre,padre_con_vida,rut, fecha_nacimiento, fecha_ficha) VALUES (?,?,?,?,?,?,?)',
+            [enfermedad_madre,madre_con_vida,enfermedad_padre,padre_con_vida,rut, fecha_nacimiento,fecha_ficha],
             (err, rows) =>{
                 connection.release() // return the connection to pool
     
