@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000
 
 //rutas
 
-const odontologos = require("./routes/Odontologos")
+//const odontologos = require("./routes/Odontologos")
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -289,7 +289,23 @@ app.get('/pacientes/:rut', (req, res) => {
 
 // GET ODONTOLOGOS
 
-app.use(odontologos)
+app.get('/odontologos', (req, res) => {
+
+    pool.getConnection((err, connection) =>{
+        if(err) throw err
+        console.log(`conected as id ${connection.threadId}`)
+
+        connection.query('SELECT * from odontologos', (err, rows) => {
+            connection.release() // return the connection to pool
+
+            if(!err){
+                res.send(rows)
+            } else{
+                console.log("error")
+            }
+        })
+    })
+})
 
 // POST ODONTOLOGO
 app.post('/odontologos', (req, res) => {
