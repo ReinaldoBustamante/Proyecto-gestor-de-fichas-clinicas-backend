@@ -65,7 +65,7 @@ router.route("/usuarios/:rut")
         db.getConnection((err, connection) => {
             if(err) throw err
             console.log(`connected as id ${connection.threadId}`)            
-            connection.query("DELETE from usuarios WHERE id_usuario = ?", [req.params.id],
+            connection.query("DELETE from usuarios WHERE rut = ?", [req.params.rut],
             (err, rows) => {
                 connection.release()
                 if(!err){
