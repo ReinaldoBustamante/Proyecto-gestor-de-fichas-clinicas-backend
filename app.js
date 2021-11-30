@@ -16,6 +16,7 @@ const fichas = require("./routes/Ficha")
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
+
 // FIX CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 const db = require("./connection")
 
 //Login
+
 app.post('/login', (req, res) => {
 
     const username = req.body.username
@@ -56,7 +58,6 @@ app.post('/login', (req, res) => {
 })
 
 // API
-app.use(login)
 app.use(usuarios)
 app.use(pacientes)
 app.use(odontologos)
