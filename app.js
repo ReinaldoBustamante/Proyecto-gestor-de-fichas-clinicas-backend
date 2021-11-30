@@ -286,16 +286,27 @@ app.get('/pacientes/:rut', (req, res) => {
 })
 
 // ODONTOLOGOS
-app.use(odontologos)
+
 // GET ODONTOLOGOS
 
-app.get('/odontologos', (req, res) => {
+app.use(odontologos)
 
+// POST ODONTOLOGO
+app.post('/odontologos', (req, res) => {
+    
+  
+    const nombre = req.body.nombre
+    const rut = req.body.rut
+    const telefono   = req.body.telefono
+    const correo  = req.body.correo
+  
+   
     pool.getConnection((err, connection) =>{
         if(err) throw err
         console.log(`conected as id ${connection.threadId}`)
 
-        connection.query('SELECT * from odontologos', (err, rows) => {
+        connection.query('INSERT INTO odontologos(nombre, rut, telefono, correo) VALUES (?,?,?,?)', [nombre, rut, telefono, correo],
+        (err, rows) =>{
             connection.release() // return the connection to pool
 
             if(!err){
@@ -305,10 +316,8 @@ app.get('/odontologos', (req, res) => {
             }
         })
     })
+   
 })
-
-// POST ODONTOLOGO
-
 
 // TONS
 
