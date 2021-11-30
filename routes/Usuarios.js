@@ -40,22 +40,24 @@ router.route("/usuarios")
         const telefono = req.body.telefono
         const rol      = req.body.rol
     
-        db.query(
-            'INSERT INTO usuarios(username, password, nombre, rut, telefono, correo, rol) VALUES (?,?,?,?,?,?,?)', [username, password, nombre, rut, telefono, correo, rol],
+        db.getConnection((err,connection) =>{
+            if(err) throw err
+            console.log(`conected as id ${connection.threadId}`)
+            connection.query('INSERT INTO usuarios(username, password, nombre, rut, telefono, correo, rol) VALUES (?,?,?,?,?,?,?)', 
+            [username, password, nombre, rut, telefono, correo, rol],
             (err, rows) =>{
-                connection.release()
+                connection.release() // return the connection to pool
+    
                 if(!err){
                     res.send(rows)
-                }
-                else{
+                } else{
                     console.log("error")
                 }
-        
-            }
-             
-        )
+            })
+        })
        
     })
+        
 
     
 router.route("/usuarios/:id")
