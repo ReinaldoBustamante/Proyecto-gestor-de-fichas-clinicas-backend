@@ -82,7 +82,7 @@ router.route("/pacientes/:rut")
     })
 
     .delete((req, res) => {
-        pool.getConnection((err, connection) => {
+        db.getConnection((err, connection) => {
             if(err) throw err
             console.log(`connected as id ${connection.threadId}`)
             
