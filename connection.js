@@ -8,8 +8,8 @@ const pool = mysql.createPool({
     port            :  '25060',
     user            : 'doadmin',
     password        : 'ASiEm5OBBilhaLg5',
-    database        : 'defaultdb',
-    sslmode = 'REQUIRED'
+    database        : 'defaultdb'
+    
 })
 
 module.exports = pool
