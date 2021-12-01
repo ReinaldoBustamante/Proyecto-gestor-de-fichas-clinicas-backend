@@ -118,5 +118,21 @@ router.route("/fichas/:rut")
             })
         })
     })
+    .delete((req, res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err
+            console.log(`connected as id ${connection.threadId}`)            
+            connection.query("DELETE from ficha WHERE rut = ?", [req.params.rut],
+            (err, rows) => {
+                connection.release()
+                if(!err){
+                    res.send(rows)
+                }
+                else{
+                    console.log("error")
+                }
+            })
+        })
+    })
 
 module.exports = router
