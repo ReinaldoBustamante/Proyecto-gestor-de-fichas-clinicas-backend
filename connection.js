@@ -4,11 +4,11 @@ const mysql = require('mysql')
 // MYSQL
 
 const pool = mysql.createPool({
-    host            : 'yjo6uubt3u5c16az.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    host            : 'us-cdbr-east-04.cleardb.com',
     port            :  '3306',
-    user            : 'rvm60oxi1nj6xss7',
-    password        : 'w5slqddkaoo937bv',
-    database        : 'xdb7zi3os0mo4g8o'
+    user            : 'bbd5a00deabf5a',
+    password        : '6b84093d',
+    database        : 'heroku_8f882350380fb7c'
     
 })
 
