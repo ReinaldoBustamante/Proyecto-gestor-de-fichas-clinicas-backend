@@ -48,12 +48,17 @@ router.route("/fichas")
         const medicamentos_cinco_años = req.body.medicamentos_cinco_años
         const alergico_droga_alimento = req.body.alergico_droga_alimento
         const que_droga_alimento = req.body.que_droga_alimento
+        const cicatriza_bien = req.body.cicatriza_bien
+        const tiene_fiebre_reumatica = req.body.tiene_fiebre_reumatica
+        const tratamiento_fiebre_reumatica = req.body.tratamiento_fiebre_reumatica
+        const diabetico = req.body.diabetico
+        const diabetes_controlada_con = req.body.diabetes_controlada_con
 
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
-            connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alegico_droga_alimento,que_drogra_alimento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', [rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alergico_droga_alimento,que_droga_alimento],
+            connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alegico_droga_alimento,que_drogra_alimento,cicatriza_bien,tiene_fiebre_reumatica,tratamiento_fiebre_reumatica,diabetico,diabetes_controlada_con) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alergico_droga_alimento,que_droga_alimento,cicatriza_bien,tiene_fiebre_reumatica,tratamiento_fiebre_reumatica,diabetico,diabetes_controlada_con],
             (err, rows) =>{
                 connection.release() // return the connection to pool
     
