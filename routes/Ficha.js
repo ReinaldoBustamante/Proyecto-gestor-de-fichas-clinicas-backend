@@ -46,13 +46,14 @@ router.route("/fichas")
         const tratamiento_paciente = req.body.tratamiento_paciente
         const medicamentos = req.body.medicamentos
         const medicamentos_cinco_años = req.body.medicamentos_cinco_años
-      
+        const alergico_droga_alimento = req.body.alergico_droga_alimento
+        const que_droga_alimento = req.body.que_droga_alimento
 
         db.getConnection((err, connection) =>{
             if(err) throw err
             console.log(`conected as id ${connection.threadId}`)
     
-            connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años) VALUES (?,?,?,?,?,?,?,?,?,?,?)', [rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años],
+            connection.query('INSERT INTO ficha(rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alergico_droga_alimento,que_droga_alimento) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', [rut,fecha_nacimiento,fecha_ficha,padre_con_vida,enfermedad_padre,madre_con_vida,enfermedad_madre,paciente_enfermo,tratamiento_paciente,medicamentos,medicamentos_cinco_años,alergico_droga_alimento,que_droga_alimento],
             (err, rows) =>{
                 connection.release() // return the connection to pool
     
