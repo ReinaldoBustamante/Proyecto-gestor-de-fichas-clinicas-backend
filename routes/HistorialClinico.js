@@ -32,7 +32,7 @@ router.route("/historiales-clinicos")
     })
     .post((req, res) => {
     
-        const fecha = req.body.id_fecha
+        const fecha = req.body.fecha
         const razon_ingreso = req.body.razon_ingreso
         const detalles = req.body.detalles
         const rut = req.body.rut
