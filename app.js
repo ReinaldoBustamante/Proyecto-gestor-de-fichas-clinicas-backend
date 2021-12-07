@@ -13,6 +13,7 @@ const odontologos = require("./routes/Odontologos")
 const tons = require("./routes/Tons")
 const fichas = require("./routes/Ficha")
 const historial_clinico = require("./routes/HistorialClinico")
+const odontograma = require("./routes/Odontograma")
 
 const cors = require('cors');
 app.use(cors())
@@ -60,6 +61,7 @@ app.use(odontologos)
 app.use(tons)
 app.use(fichas)
 app.use(historial_clinico)
+app.use(odontograma)
 // Listen on enviroment port or 5000
 
 app.listen(port,() => console.log(`Listen on port ${port}`))
