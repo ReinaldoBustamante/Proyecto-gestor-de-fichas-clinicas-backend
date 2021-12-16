@@ -10,23 +10,7 @@ app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
-router.route("/odontograma/:fecha")
-    .get((req, res) => {
-        db.getConnection((err, connection) => {
-            if(err) throw err
-            console.log(`connected as id ${connection.threadId}`)            
-            connection.query("SELECT * from odontograma WHERE fecha = ?", [req.params.fecha],
-            (err, rows) => {
-                connection.release()
-                if(!err){
-                    res.send(rows)
-                }
-                else{
-                    console.log("error")
-                }
-            })
-        })
-    })  
+
 router.route("/odontograma/:rut")
     .get((req, res) => {
         db.getConnection((err, connection) => {
@@ -45,6 +29,26 @@ router.route("/odontograma/:rut")
         })
     }) 
     
+    router.route("/odontograma/:rut/:fecha")
+    
+    .get((req, res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err
+            console.log(`connected as id ${connection.threadId}`) 
+            console.log(req.params.rut)           
+            connection.query("SELECT * from odontograma WHERE (rut = ? AND fecha= ?) ", [req.params.rut, req.params.fecha],
+            (err, rows) => {
+                connection.release()
+                if(!err){
+                    res.send(rows)
+                }
+                else{
+                    console.log("error")
+                }
+            })
+        })
+    }) 
+
 router.route("/odontograma")
     .get((req, res) => {
         db.getConnection((err, connection) => {
