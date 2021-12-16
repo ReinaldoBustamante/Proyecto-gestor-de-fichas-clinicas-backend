@@ -27,6 +27,35 @@ router.route("/odontograma/:fecha")
             })
         })
     })    
+router.route("/odontograma")
+    .post((req, res) => {
+    
+  
+        const fecha = req.body.fecha
+        const rut = req.body.rut
+        const diagnostico   = req.body.diagnostico
+        const pieza  = req.body.pieza
+        const cara = req.body.cara
+        const procedimiento = req.body.procedimiento
+      
+       
+        db.getConnection((err, connection) =>{
+            if(err) throw err
+            console.log(`conected as id ${connection.threadId}`)
+    
+            connection.query('INSERT INTO odontograma(fecha, rut, diagnostico, pieza, cara, procedimiento) VALUES (?,?,?,?,?,?)', [fecha, rut, diagnostico, pieza, cara, procedimiento],
+            (err, rows) =>{
+                connection.release() // return the connection to pool
+    
+                if(!err){
+                    res.send(rows)
+                } else{
+                    console.log("error")
+                }
+            })
+        })
+       
+    })
 
 
 
