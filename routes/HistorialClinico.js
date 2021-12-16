@@ -75,7 +75,25 @@ router.route("/historiales-clinicos/:rut")
         })
     
     })
+router.route("/historiales-clinicos/:rut/:fecha")
+    .get((req, res) => {
 
+        db.getConnection((err, connection) =>{
+            if(err) throw err
+            console.log(`conected as id ${connection.threadId}`)
+    
+            connection.query('SELECT * from historial_clinico WHERE rut = ? and fecha = ?', [req.params.rut, req.params.fecha], (err, rows) => {
+                connection.release() // return the connection to pool
+    
+                if(!err){
+                    res.send(rows)
+                } else{
+                    console.log("error")
+                }
+            })
+        })
+    
+    })
     .delete((req, res) => {
         db.getConnection((err, connection) => {
             if(err) throw err
