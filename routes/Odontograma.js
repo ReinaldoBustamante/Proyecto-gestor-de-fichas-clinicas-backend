@@ -28,6 +28,22 @@ router.route("/odontograma/:fecha")
         })
     })    
 router.route("/odontograma")
+    .get((req, res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err
+            console.log(`connected as id ${connection.threadId}`)            
+            connection.query("SELECT * from odontograma",
+            (err, rows) => {
+                connection.release()
+                if(!err){
+                    res.send(rows)
+                }
+                else{
+                    console.log("error")
+                }
+            })
+        })
+    })    
     .post((req, res) => {
     
   
