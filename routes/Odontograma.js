@@ -45,6 +45,23 @@ router.route("/piezas/:rut/")
             })
         })
     }) 
+router.route("/piezas/:rut/:pieza")
+    .get((req, res) => {
+        db.getConnection((err, connection) => {
+            if(err) throw err
+            console.log(`connected as id ${connection.threadId}`)            
+            connection.query("SELECT * from odontograma WHERE rut=? and pieza=?", [req.params.rut, req.params.pieza],
+            (err, rows) => {
+                connection.release()
+                if(!err){
+                    res.send(rows)
+                }
+                else{
+                    console.log("error")
+                }
+            })
+        })
+    }) 
     
     router.route("/odontograma/:rut/:fecha")
     
