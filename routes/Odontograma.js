@@ -28,12 +28,12 @@ router.route("/odontograma/:rut")
             })
         })
     }) 
-router.route("/piezas/:rut/:pieza")
+router.route("/piezas/:rut/")
     .get((req, res) => {
         db.getConnection((err, connection) => {
             if(err) throw err
             console.log(`connected as id ${connection.threadId}`)            
-            connection.query("SELECT DISTINCT pieza from odontograma WHERE rut=? AND pieza = ?", [req.params.rut, req.params.pieza],
+            connection.query("SELECT DISTINCT pieza from odontograma WHERE rut=?", [req.params.rut],
             (err, rows) => {
                 connection.release()
                 if(!err){
