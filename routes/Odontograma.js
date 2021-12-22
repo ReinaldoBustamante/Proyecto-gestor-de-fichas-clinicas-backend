@@ -27,24 +27,6 @@ router.route("/odontograma/:rut")
                 }
             })
         })
-    
-    })
-    .delete((req, res) => {
-        db.getConnection((err, connection) => {
-            if(err) throw err
-            console.log(`connected as id ${connection.threadId}`)
-            
-            connection.query("DELETE from odontograma WHERE rut = ?", [req.params.rut],
-            (err, rows) => {
-                connection.release()
-                if(!err){
-                    res.send(rows)
-    
-                } else{
-                    console.log("error")
-                }
-            })
-        })
     }) 
 router.route("/piezas/:rut/")
     .get((req, res) => {
@@ -62,25 +44,7 @@ router.route("/piezas/:rut/")
                 }
             })
         })
-    
     }) 
-    .delete((req, res) => {
-        db.getConnection((err, connection) => {
-            if(err) throw err
-            console.log(`connected as id ${connection.threadId}`)
-            
-            connection.query("DELETE from odontograma WHERE rut = ?", [req.params.rut],
-            (err, rows) => {
-                connection.release()
-                if(!err){
-                    res.send(rows)
-    
-                } else{
-                    console.log("error")
-                }
-            })
-        })
-    })
 router.route("/piezas/:rut/:pieza")
     .get((req, res) => {
         db.getConnection((err, connection) => {
